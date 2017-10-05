@@ -33,6 +33,7 @@ public class MySQLite extends SQLiteOpenHelper{
         db.execSQL(DistributeurManager.CREATE_TABLE_DISTRIBUTEUR);
         db.execSQL(TubeManager.CREATE_TABLE_TUBE);
         db.execSQL(ProduitManager.CREATE_TABLE_PRODUIT);
+        db.execSQL(AchatManager.CREATE_TABLE_ACHAT);
     }
 
     @Override
