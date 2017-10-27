@@ -9,7 +9,8 @@
         android:id="@+id/display"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        tools:background="#AAA" />
+        android:src="@mipmap/ic_launcher"/>
+        #tools:background="#AAA" />
 
         <TextView
             android:id="@+id/nom"

@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
             viewHolder.nom.setText(volant.getNom());
             viewHolder.description.setText(volant.getDescription());
-            viewHolder.display.setImageDrawable(new ColorDrawable(volant.getDisplay()));
+            viewHolder.display.setImageResource(volant.getDisplay());
 
             return convertView;
         }
@@ -131,9 +131,9 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Volant> genererVolants(){
         List<Volant> volants = new ArrayList<Volant>();
-        volants.add(new Volant(Color.BLACK, "Yonex", "Description Yonex"));
-        volants.add(new Volant(Color.BLUE, "Grade 3", "Description Grade 3"));
-        volants.add(new Volant(Color.GREEN, "Grade A9", "Description Grade A9"));
+        volants.add(new Volant(getResources().getIdentifier("ic_launcher", "mipmap", getPackageName()), "Yonex", "Référence Yonex"));
+        volants.add(new Volant(getResources().getIdentifier("ic_launcher", "mipmap", getPackageName()), "Grade 3", "Référence Grade 3"));
+        volants.add(new Volant(getResources().getIdentifier("ic_launcher", "mipmap", getPackageName()), "Grade A9", "Référence Grade A9"));
         return volants;
     }
 }
