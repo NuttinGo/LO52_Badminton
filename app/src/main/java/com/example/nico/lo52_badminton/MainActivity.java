@@ -8,6 +8,8 @@ import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -22,6 +24,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ListView mListView;
+    private MenuItem stockItem;
+    private MenuItem achatItem;
 
     /*private String[] volants = new String[]{
             "Yonex", "Grade 3", "Grade A9"
@@ -31,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setTitle("LardeSports");
 
         mListView = (ListView) findViewById(R.id.listView);
 
@@ -69,6 +75,32 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("MyAPP","Database OK");
         Log.i("MyAPP",dbHelper.getDatabaseName());
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        stockItem = menu.findItem(R.id.action_stock);
+        achatItem = menu.findItem(R.id.action_achat);
+        stockItem.setVisible(false);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_stock:
+                setContentView(R.layout.activity_main);
+                item.setVisible(false);
+                achatItem.setVisible(true);
+                Log.i("MyAPP","Stock");
+                return true;
+            case R.id.action_achat:
+                setContentView(R.layout.achat);
+                item.setVisible(false);
+                stockItem.setVisible(true);
+                Log.i("MyAPP","Achat");
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public class Volant {

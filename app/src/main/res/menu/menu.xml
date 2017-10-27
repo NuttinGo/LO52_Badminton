@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_stock"
+        android:icon="@drawable/ic_widgets_black_24dp"
+        android:title="Stock"
+        app:showAsAction="always"></item>
+    <item android:id="@+id/action_achat"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:title="Achat"
+        app:showAsAction="ifRoom"></item>
+</menu>
