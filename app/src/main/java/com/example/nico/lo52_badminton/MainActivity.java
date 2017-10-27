@@ -75,11 +75,13 @@ public class MainActivity extends AppCompatActivity {
         private int display;
         private String nom;
         private String description;
+        private String stock;
 
-        public Volant(int display, String nom, String description) {
+        public Volant(int display, String nom, String description, String stock) {
             this.display = display;
             this.nom = nom;
             this.description = description;
+            this.stock = stock;
         }
 
         public String getNom(){
@@ -90,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
         }
         public int getDisplay(){
             return this.display;
+        }
+        public String getStock(){
+            return this.stock;
         }
     }
 
@@ -110,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 viewHolder.nom = (TextView) convertView.findViewById(R.id.nom);
                 viewHolder.description = (TextView) convertView.findViewById(R.id.description);
                 viewHolder.display = (ImageView) convertView.findViewById(R.id.display);
+                viewHolder.stock = (TextView) convertView.findViewById(R.id.stock);
                 convertView.setTag(viewHolder);
             }
 
@@ -118,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
             viewHolder.nom.setText(volant.getNom());
             viewHolder.description.setText(volant.getDescription());
             viewHolder.display.setImageResource(volant.getDisplay());
+            viewHolder.stock.setText("Stock : " + volant.getStock());
 
             return convertView;
         }
@@ -126,14 +133,18 @@ public class MainActivity extends AppCompatActivity {
             public TextView nom;
             public TextView description;
             public ImageView display;
+            public TextView stock;
         }
     }
 
     private List<Volant> genererVolants(){
         List<Volant> volants = new ArrayList<Volant>();
-        volants.add(new Volant(getResources().getIdentifier("ic_launcher", "mipmap", getPackageName()), "Yonex", "Référence Yonex"));
-        volants.add(new Volant(getResources().getIdentifier("ic_launcher", "mipmap", getPackageName()), "Grade 3", "Référence Grade 3"));
-        volants.add(new Volant(getResources().getIdentifier("ic_launcher", "mipmap", getPackageName()), "Grade A9", "Référence Grade A9"));
+        volants.add(new Volant(getResources().getIdentifier("ic_launcher", "mipmap", getPackageName()), "Yonex", "Référence Yonex", "100/150"));
+        volants.add(new Volant(getResources().getIdentifier("ic_launcher", "mipmap", getPackageName()), "Grade 3", "Référence Grade 3", "320/400"));
+        volants.add(new Volant(getResources().getIdentifier("ic_launcher", "mipmap", getPackageName()), "Grade A9", "Référence Grade A9", "8/1000"));
+        volants.add(new Volant(getResources().getIdentifier("aerosensa", "drawable", getPackageName()), "Yonex", "Référence Yonex", "100/150"));
+        volants.add(new Volant(getResources().getIdentifier("rsl", "drawable", getPackageName()), "Grade 3", "Référence Grade 3", "320/400"));
+        volants.add(new Volant(getResources().getIdentifier("rsl_blanc", "drawable", getPackageName()), "Grade A9", "Référence Grade A9", "8/1000"));
         return volants;
     }
 }
