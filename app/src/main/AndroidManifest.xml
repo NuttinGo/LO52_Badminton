@@ -9,7 +9,6 @@
         android:roundIcon="@drawable/badminton"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,9 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".AchatActivity"/>
-
+        <activity android:name=".AchatActivity" />
+        <activity android:name=".FormulaireActivity"
+            android:parentActivityName=".AchatActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AchatActivity" />
+    </activity>
     </application>
 
 </manifest>

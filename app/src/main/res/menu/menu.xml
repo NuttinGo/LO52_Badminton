@@ -9,4 +9,11 @@
         android:icon="@drawable/ic_shopping_cart_black_24dp"
         android:title="Achat"
         app:showAsAction="ifRoom"></item>
+
+    <item
+        android:id="@+id/action_formulaire"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Formulaire"
+        app:showAsAction="ifRoom"
+        ></item>
 </menu>

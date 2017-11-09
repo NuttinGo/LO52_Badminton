@@ -10,6 +10,11 @@ public class Client {
     private String nom_client;
 
     // Constructeur
+    public Client(String nom) {
+        this.id_client=0;
+        this.nom_client=nom;
+    }
+
     public Client(int id,String nom) {
         this.id_client=id;
         this.nom_client=nom;

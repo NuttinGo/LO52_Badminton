@@ -51,6 +51,11 @@ public class AchatActivity extends AppCompatActivity{
         getMenuInflater().inflate(R.menu.menu, menu);
         MenuItem achatItem = menu.findItem(R.id.action_achat);
         achatItem.setVisible(false);
+
+
+        MenuItem formulaireItem = menu.findItem(R.id.action_formulaire);
+        formulaireItem.setVisible(true);
+
         return true;
     }
 
@@ -59,6 +64,11 @@ public class AchatActivity extends AppCompatActivity{
             case R.id.action_stock:
                 Intent intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
+                this.finish();
+                return true;
+            case R.id.action_formulaire:
+                Intent intent2 = new Intent(this,FormulaireActivity.class);
+                startActivity(intent2);
                 this.finish();
                 return true;
         }

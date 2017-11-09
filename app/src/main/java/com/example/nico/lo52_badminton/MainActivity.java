@@ -44,6 +44,23 @@ public class MainActivity extends AppCompatActivity {
         mListView.setAdapter(adapter);
 
         MySQLite dbHelper= MySQLite.getInstance(this);
+        ClientManager c = new ClientManager(this);
+        c.open();
+
+        c.addClient(new Client(1,"Jean-Claude"));
+
+        /*
+        MySQLite.delete();
+        ClientManager clientManager = new ClientManager(this);
+        TubeManager tubeManager = new TubeManager(this);
+        AchatManager achatManager = new AchatManager(this);
+
+        clientManager.addClient(new Client("Jean-Eudes"));
+        clientManager.addClient(new Client("Jean-Kevin"));
+
+        tubeManager.addTube(new Tube())
+        */
+
 
         //dbHelper.onCreate(MySQLite.getInstance(this).getWritableDatabase());
 
@@ -76,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         MenuItem stockItem = menu.findItem(R.id.action_stock);
         stockItem.setVisible(false);
+
+        MenuItem formulaireItem = menu.findItem(R.id.action_formulaire);
+        formulaireItem.setVisible(false);
         return true;
     }
 
@@ -157,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private List<Volant> genererVolants(){
+        //Chercher dans BDD
         List<Volant> volants = new ArrayList<Volant>();
         volants.add(new Volant(getResources().getIdentifier("aerosensa", "drawable", getPackageName()), "Yonex", "Référence Yonex", "100/150"));
         volants.add(new Volant(getResources().getIdentifier("rsl", "drawable", getPackageName()), "Grade 3", "Référence Grade 3", "320/400"));

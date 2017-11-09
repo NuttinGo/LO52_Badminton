@@ -15,7 +15,7 @@ public class ClientManager {
     public static final String KEY_NOM_CLIENT="nom_client";
     public static final String CREATE_TABLE_CLIENT = "CREATE TABLE "+TABLE_NAME+
             " (" +
-            " "+KEY_ID_CLIENT+" INTEGER primary key," +
+            " "+KEY_ID_CLIENT+" INTEGER primary key AUTOINCREMENT," +
             " "+KEY_NOM_CLIENT+" TEXT" +
             ");";
     private MySQLite maBaseSQLite; // notre gestionnaire du fichier SQLite

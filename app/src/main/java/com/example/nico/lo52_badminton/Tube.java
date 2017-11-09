@@ -9,13 +9,15 @@ public class Tube {
     private int id_marque;
     private int classement_fed_tube;
     private String validite_tube;
+    private String nom_image_tube;
 
     // Constructeur
-    public Tube(int id,int marque,int classement,String val) {
+    public Tube(int id,int marque,int classement,String val,String image) {
         this.id_tube=id;
         this.id_marque=marque;
         this.classement_fed_tube=classement;
         this.validite_tube=val;
+        this.nom_image_tube=image;
     }
 
     public int getId_tube() {
@@ -49,4 +51,13 @@ public class Tube {
     public void setValidite_tube(String val) {
         this.validite_tube = val;
     }
+
+    public String getNomImage_tube() {
+        return nom_image_tube;
+    }
+
+    public void setNomImage_Tube(String val) {
+        this.nom_image_tube = val;
+    }
+
 }

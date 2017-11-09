@@ -40,4 +40,8 @@ public class MySQLite extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onCreate(db);
     }
+
+    public static void delete(){
+        delete();
+    }
 }
