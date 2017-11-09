@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:orientation="vertical" android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="10dp">
+
+<TextView
+    android:id="@+id/nomAcheteur"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@android:color/black"
+    android:layout_marginLeft="10dp"
+    android:textStyle="bold"
+    tools:text="Nom de l'acheteur" />
+
+<TextView android:id="@+id/prix"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@android:color/black"
+    android:layout_alignLeft="@+id/nomAcheteur"
+    android:layout_below="@+id/nomAcheteur"
+    tools:text="Prix" />
+
+<TextView android:id="@+id/quantite"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@android:color/black"
+    android:layout_alignLeft="@+id/prix"
+    android:layout_below="@+id/prix"
+    tools:text="Quantité" />
+
+    <TextView android:id="@+id/reference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_alignLeft="@+id/quantite"
+        android:layout_below="@+id/quantite"
+        tools:text="Référence du produit" />
+
+</RelativeLayout>

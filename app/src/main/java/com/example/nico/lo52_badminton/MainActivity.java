@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        setTitle("LardeSports");
+        setTitle("LardeSports - Stock");
 
         mListView = (ListView) findViewById(R.id.listView);
 
