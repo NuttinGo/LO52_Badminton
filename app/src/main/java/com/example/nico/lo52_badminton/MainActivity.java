@@ -1,6 +1,7 @@
 package com.example.nico.lo52_badminton;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -24,25 +25,19 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ListView mListView;
-    private MenuItem stockItem;
-    private MenuItem achatItem;
-
-    /*private String[] volants = new String[]{
-            "Yonex", "Grade 3", "Grade A9"
-    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
         setContentView(R.layout.activity_main);
 
         setTitle("LardeSports");
 
         mListView = (ListView) findViewById(R.id.listView);
 
-        /*final ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
-                android.R.layout.simple_list_item_1, volants);
-        mListView.setAdapter(adapter);*/
         List<Volant> volants = genererVolants();
 
         VolantAdapter adapter = new VolantAdapter(MainActivity.this, volants);
@@ -79,25 +74,17 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        stockItem = menu.findItem(R.id.action_stock);
-        achatItem = menu.findItem(R.id.action_achat);
+        MenuItem stockItem = menu.findItem(R.id.action_stock);
         stockItem.setVisible(false);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_stock:
-                setContentView(R.layout.activity_main);
-                item.setVisible(false);
-                achatItem.setVisible(true);
-                Log.i("MyAPP","Stock");
-                return true;
             case R.id.action_achat:
-                setContentView(R.layout.achat);
-                item.setVisible(false);
-                stockItem.setVisible(true);
-                Log.i("MyAPP","Achat");
+                Intent intent = new Intent(this,AchatActivity.class);
+                startActivity(intent);
+                this.finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -171,9 +158,12 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Volant> genererVolants(){
         List<Volant> volants = new ArrayList<Volant>();
-        volants.add(new Volant(getResources().getIdentifier("ic_launcher", "mipmap", getPackageName()), "Yonex", "Référence Yonex", "100/150"));
-        volants.add(new Volant(getResources().getIdentifier("ic_launcher", "mipmap", getPackageName()), "Grade 3", "Référence Grade 3", "320/400"));
-        volants.add(new Volant(getResources().getIdentifier("ic_launcher", "mipmap", getPackageName()), "Grade A9", "Référence Grade A9", "8/1000"));
+        volants.add(new Volant(getResources().getIdentifier("aerosensa", "drawable", getPackageName()), "Yonex", "Référence Yonex", "100/150"));
+        volants.add(new Volant(getResources().getIdentifier("rsl", "drawable", getPackageName()), "Grade 3", "Référence Grade 3", "320/400"));
+        volants.add(new Volant(getResources().getIdentifier("rsl_blanc", "drawable", getPackageName()), "Grade A9", "Référence Grade A9", "8/1000"));
+        volants.add(new Volant(getResources().getIdentifier("aerosensa", "drawable", getPackageName()), "Yonex", "Référence Yonex", "100/150"));
+        volants.add(new Volant(getResources().getIdentifier("rsl", "drawable", getPackageName()), "Grade 3", "Référence Grade 3", "320/400"));
+        volants.add(new Volant(getResources().getIdentifier("rsl_blanc", "drawable", getPackageName()), "Grade A9", "Référence Grade A9", "8/1000"));
         volants.add(new Volant(getResources().getIdentifier("aerosensa", "drawable", getPackageName()), "Yonex", "Référence Yonex", "100/150"));
         volants.add(new Volant(getResources().getIdentifier("rsl", "drawable", getPackageName()), "Grade 3", "Référence Grade 3", "320/400"));
         volants.add(new Volant(getResources().getIdentifier("rsl_blanc", "drawable", getPackageName()), "Grade A9", "Référence Grade A9", "8/1000"));
