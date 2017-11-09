@@ -2,6 +2,7 @@ package com.example.nico.lo52_badminton;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -69,12 +70,14 @@ public class AchatActivity extends AppCompatActivity{
         private String prix;
         private String quantite;
         private String reference;
+        private Boolean paye;
 
-        public Vente (String nomAcheteur, String prix, String quantite, String reference) {
+        public Vente (String nomAcheteur, String prix, String quantite, String reference, Boolean paye) {
             this.nomAcheteur = nomAcheteur;
             this.prix = prix;
             this.quantite = quantite;
             this.reference = reference;
+            this.paye = paye;
         }
 
         public String getNomAcheteur(){
@@ -88,6 +91,9 @@ public class AchatActivity extends AppCompatActivity{
         }
         public String getReference(){
             return this.reference;
+        }
+        public Boolean getPaye(){
+            return this.paye;
         }
     }
 
@@ -114,6 +120,13 @@ public class AchatActivity extends AppCompatActivity{
 
             Vente vente = getItem(position);
 
+            if(vente.getPaye()==Boolean.TRUE)
+            {
+                viewHolder.prix.setTextColor(Color.rgb(0, 177, 0));
+            }else{
+                viewHolder.prix.setTextColor(Color.RED);
+            }
+
             viewHolder.nomAcheteur.setText(vente.getNomAcheteur());
             viewHolder.prix.setText("Prix : " +vente.getPrix());
             viewHolder.quantite.setText("Quantité : " +vente.getQuantite());
@@ -132,12 +145,12 @@ public class AchatActivity extends AppCompatActivity{
 
     private List<Vente> genererVentes(){
         List<Vente> ventes = new ArrayList<Vente>();
-        ventes.add(new Vente("Nicolas CARRION","35 €", "7", "5874A52F"));
-        ventes.add(new Vente("Florian STAINE","5 €", "1", "6984615G"));
-        ventes.add(new Vente("Cédric WELTY","55 €", "9", "321EF651"));
-        ventes.add(new Vente("Guillaume BOURRIOT","34 €", "3", "SD12684P"));
-        ventes.add(new Vente("Antoine COUPAT","48 €", "7", "DL469CM0"));
-        ventes.add(new Vente("Florian BRUNSTEIN","3 €", "1", "3465XZ68"));
+        ventes.add(new Vente("Nicolas CARRION","35 €", "7", "5874A52F",Boolean.TRUE));
+        ventes.add(new Vente("Florian STAINE","5 €", "1", "6984615G",Boolean.FALSE));
+        ventes.add(new Vente("Cédric WELTY","55 €", "9", "321EF651",Boolean.TRUE));
+        ventes.add(new Vente("Guillaume BOURRIOT","34 €", "3", "SD12684P",Boolean.TRUE));
+        ventes.add(new Vente("Antoine COUPAT","48 €", "7", "DL469CM0",Boolean.FALSE));
+        ventes.add(new Vente("Florian BRUNSTEIN","3 €", "1", "3465XZ68",Boolean.FALSE));
         return ventes;
     }
 
