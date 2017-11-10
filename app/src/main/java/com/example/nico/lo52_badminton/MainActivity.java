@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
         while(cursorProduit.moveToNext()){
             t= tubeManager.getTube(cursorProduit.getInt(2));
             //Log.i("Cursor",cursorProduit.getInt(1)+"");
-            volants.add(new Volant(getResources().getIdentifier(t.getNomImage_tube(),"drawable",getPackageName()),distributeurManager.getDistributeur(cursorProduit.getInt(1)).getNom_distributeur(),marqueManager.getMarque(t.getId_Marque()).getNom_marque()+" - "+t.getNom_tube(),cursorProduit.getString(4)));
+            volants.add(new Volant(getResources().getIdentifier(t.getNomImage_tube(),"drawable",getPackageName()),marqueManager.getMarque(t.getId_Marque()).getNom_marque(),t.getNom_tube(),cursorProduit.getString(4)));
         }
 
         produitManager.close();
