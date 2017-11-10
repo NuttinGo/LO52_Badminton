@@ -56,7 +56,7 @@ public class FormulaireActivity extends AppCompatActivity implements AdapterView
             tubeManager.open();
 
             while (cursorProduit.moveToNext()) {
-                t = tubeManager.getTube(cursorProduit.getInt(1));
+                t = tubeManager.getTube(cursorProduit.getInt(2));
                 Log.i("Cursor", cursorProduit.getInt(1) + "");
                 tubes.add(t.getNom_tube());
             }
