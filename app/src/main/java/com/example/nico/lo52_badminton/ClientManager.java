@@ -10,12 +10,12 @@ import android.database.sqlite.SQLiteDatabase;
  */
 
 public class ClientManager {
-    private static final String TABLE_NAME = "client";
+    public static final String TABLE_NAME = "client";
     public static final String KEY_ID_CLIENT="id_client";
     public static final String KEY_NOM_CLIENT="nom_client";
     public static final String CREATE_TABLE_CLIENT = "CREATE TABLE "+TABLE_NAME+
             " (" +
-            " "+KEY_ID_CLIENT+" INTEGER primary key AUTOINCREMENT," +
+            " "+KEY_ID_CLIENT+" INTEGER primary key," +
             " "+KEY_NOM_CLIENT+" TEXT" +
             ");";
     private MySQLite maBaseSQLite; // notre gestionnaire du fichier SQLite
@@ -87,10 +87,28 @@ public class ClientManager {
         return a;
     }
 
+    public Client getClient(String s) {
+        // Retourne l'Client dont l'id est passé en paramètre
+
+        Client a=new Client(0,"");
+
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_NOM_CLIENT+"="+s, null);
+        if (c.moveToFirst()) {
+            a.setId_client(c.getInt(c.getColumnIndex(KEY_ID_CLIENT)));
+            a.setNom_client(c.getString(c.getColumnIndex(KEY_NOM_CLIENT)));
+            c.close();
+        }
+
+        return a;
+    }
+
     public Cursor getClients() {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
     }
 
+    public void init(){
+
+    }
 
 }

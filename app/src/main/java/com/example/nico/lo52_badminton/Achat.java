@@ -5,6 +5,7 @@ package com.example.nico.lo52_badminton;
  */
 
 public class Achat {
+    private int id_achat;
     private int id_client;
     private int id_produit;
     private int quantite_achat;
@@ -13,12 +14,21 @@ public class Achat {
     private String date_achat;
 
     // Constructeur
-    public Achat(int id_c,int id_p,int q,int b,String s) {
+    public Achat(int id_a,int id_c,int id_p,int q,int b,String s) {
+        this.id_achat=id_a;
         this.id_client=id_c;
         this.id_produit=id_p;
         this.quantite_achat=q;
         this.achat_effectue=b;
         this.date_achat=s;
+    }
+
+    public int getId_achat() {
+        return id_achat;
+    }
+
+    public void setId_achat(int id) {
+        this.id_achat = id;
     }
 
     public int getId_client() {

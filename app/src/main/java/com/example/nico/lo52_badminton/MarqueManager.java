@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
  */
 
 public class MarqueManager {
-    private static final String TABLE_NAME = "marque";
+    public static final String TABLE_NAME = "marque";
     public static final String KEY_ID_MARQUE="id_marque";
     public static final String KEY_NOM_MARQUE="nom_marque";
     public static final String CREATE_TABLE_MARQUE = "CREATE TABLE "+TABLE_NAME+
@@ -91,5 +91,7 @@ public class MarqueManager {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
     }
+
+
 
 }

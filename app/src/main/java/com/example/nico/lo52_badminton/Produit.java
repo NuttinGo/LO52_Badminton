@@ -5,17 +5,29 @@ package com.example.nico.lo52_badminton;
  */
 
 public class Produit {
+    private int id_produit;
     private int id_distributeur;
     private int id_tube;
     private float prix_produit;
     private int stock_produit;
 
     // Constructeur
-    public Produit(int id_d,int id_t,float p,int s) {
+    public Produit(int id_p,int id_d,int id_t,float p,int s) {
+        this.id_produit=id_p;
         this.id_distributeur=id_d;
         this.id_tube=id_t;
         this.prix_produit=p;
         this.stock_produit=s;
+    }
+
+
+
+    public int getId_produit() {
+        return id_produit;
+    }
+
+    public void setId_produit(int id) {
+        this.id_produit = id;
     }
 
     public int getId_distributeur() {

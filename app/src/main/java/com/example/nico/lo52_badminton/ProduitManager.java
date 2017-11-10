@@ -10,18 +10,19 @@ import android.database.sqlite.SQLiteDatabase;
  */
 
 public class ProduitManager {
-    private static final String TABLE_NAME = "produit";
+    public static final String TABLE_NAME = "produit";
+    public static final String KEY_ID_PRODUIT="id_produit";
     public static final String KEY_ID_DISTRIBUTEUR="id_distributeur";
     public static final String KEY_ID_TUBE="id_tube";
     public static final String KEY_PRIX_PRODUIT="prix_produit";
     public static final String KEY_STOCK_PRODUIT="stock_produit";
     public static final String CREATE_TABLE_PRODUIT = "CREATE TABLE "+TABLE_NAME+
             " (" +
+            " "+KEY_ID_PRODUIT+" INTEGER PRIMARY KEY," +
             " "+KEY_ID_DISTRIBUTEUR+" INTEGER REFERENCES distributeur(id_distributeur) ON UPDATE CASCADE," +
             " "+KEY_ID_TUBE+" INTEGER REFERENCES tube(id_tube) ON UPDATE CASCADE,"+
             " "+KEY_PRIX_PRODUIT+" INTEGER," +
-            " "+KEY_STOCK_PRODUIT+" TEXT," +
-            " primary key ("+KEY_ID_DISTRIBUTEUR+","+KEY_ID_TUBE+")"+
+            " "+KEY_STOCK_PRODUIT+" TEXT" +
             ");";
     private MySQLite maBaseSQLite; // notre gestionnaire du fichier SQLite
     private SQLiteDatabase db;
@@ -48,6 +49,7 @@ public class ProduitManager {
         // Ajout d'un enregistrement dans la table
 
         ContentValues values = new ContentValues();
+        values.put(KEY_ID_PRODUIT, produit.getId_produit());
         values.put(KEY_ID_DISTRIBUTEUR, produit.getId_distributeur());
         values.put(KEY_ID_TUBE, produit.getId_tube());
         values.put(KEY_PRIX_PRODUIT, produit.getPrix_produit());
@@ -62,12 +64,13 @@ public class ProduitManager {
         // valeur de retour : (int) nombre de lignes affectées par la requête
 
         ContentValues values = new ContentValues();
+        values.put(KEY_ID_PRODUIT, produit.getId_produit());
         values.put(KEY_ID_DISTRIBUTEUR, produit.getId_distributeur());
         values.put(KEY_ID_TUBE, produit.getId_tube());
         values.put(KEY_PRIX_PRODUIT, produit.getPrix_produit());
         values.put(KEY_STOCK_PRODUIT, produit.getStock_produit());
 
-        String where = KEY_ID_DISTRIBUTEUR+" = ? and "+KEY_ID_TUBE+" = ?";
+        String where = KEY_ID_PRODUIT+" = ?";
         String[] whereArgs = {produit.getId_distributeur()+"",produit.getId_tube()+""};
 
         return db.update(TABLE_NAME, values, where, whereArgs);
@@ -77,19 +80,20 @@ public class ProduitManager {
         // suppression d'un enregistrement
         // valeur de retour : (int) nombre de lignes affectées par la clause WHERE, 0 sinon
 
-        String where = KEY_ID_DISTRIBUTEUR+" = ? and "+KEY_ID_TUBE+" = ?";
+        String where = KEY_ID_PRODUIT+" = ?";
         String[] whereArgs = {produit.getId_distributeur()+"",produit.getId_tube()+""};
 
         return db.delete(TABLE_NAME, where, whereArgs);
     }
 
-    public Produit getProduit(int idDist,int idTub) {
+    public Produit getProduit(int idProd) {
         // Retourne l'Produit dont l'id est passé en paramètre
 
-        Produit a=new Produit(0,0,0,0);
+        Produit a=new Produit(0,0,0,0,0);
 
-        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_ID_DISTRIBUTEUR+"="+idDist+" AND "+KEY_ID_TUBE+"="+idTub, null);
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+KEY_ID_PRODUIT+"="+idProd, null);
         if (c.moveToFirst()) {
+            a.setId_produit(c.getInt(c.getColumnIndex(KEY_ID_PRODUIT)));
             a.setId_distributeur(c.getInt(c.getColumnIndex(KEY_ID_DISTRIBUTEUR)));
             a.setId_tube(c.getInt(c.getColumnIndex(KEY_ID_TUBE)));
             a.setPrix_produit(c.getFloat(c.getColumnIndex(KEY_PRIX_PRODUIT)));
@@ -104,4 +108,6 @@ public class ProduitManager {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
     }
+
+
 }

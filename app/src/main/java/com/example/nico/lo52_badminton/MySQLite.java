@@ -34,14 +34,19 @@ public class MySQLite extends SQLiteOpenHelper{
         db.execSQL(TubeManager.CREATE_TABLE_TUBE);
         db.execSQL(ProduitManager.CREATE_TABLE_PRODUIT);
         db.execSQL(AchatManager.CREATE_TABLE_ACHAT);
+
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        onCreate(db);
-    }
 
-    public static void delete(){
-        delete();
+        db.execSQL("DROP TABLE " + ClientManager.TABLE_NAME + ";");
+        db.execSQL("DROP TABLE " + MarqueManager.TABLE_NAME + ";");
+        db.execSQL("DROP TABLE " + DistributeurManager.TABLE_NAME + ";");
+        db.execSQL("DROP TABLE " + TubeManager.TABLE_NAME + ";");
+        db.execSQL("DROP TABLE " + ProduitManager.TABLE_NAME + ";");
+        db.execSQL("DROP TABLE " + AchatManager.TABLE_NAME + ";");
+        onCreate(db);
     }
 }

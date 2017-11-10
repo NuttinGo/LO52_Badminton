@@ -2,6 +2,7 @@ package com.example.nico.lo52_badminton;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -23,7 +25,7 @@ import java.util.List;
  * Created by Valentin on 27/10/2017.
  */
 
-public class AchatActivity extends AppCompatActivity{
+public class AchatActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     private ListView mListView;
 
@@ -44,7 +46,8 @@ public class AchatActivity extends AppCompatActivity{
         VenteAdapter adapter = new VenteAdapter(AchatActivity.this, ventes);
         mListView.setAdapter(adapter);
 
-        MySQLite dbHelper= MySQLite.getInstance(this);
+        mListView.setOnItemClickListener(this);
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,14 +78,29 @@ public class AchatActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.i("Test",((Vente)parent.getItemAtPosition(position)).idVente+"");
+        Intent intent = new Intent ( AchatActivity.this,FormulaireActivity.class);
+        intent.putExtra("idAchat",((Vente)parent.getItemAtPosition(position)).idVente);
+        intent.putExtra("produit",((Vente)parent.getItemAtPosition(position)).reference);
+        intent.putExtra("quantite",((Vente)parent.getItemAtPosition(position)).quantite);
+        intent.putExtra("acheteur",((Vente)parent.getItemAtPosition(position)).nomAcheteur);
+        intent.putExtra("estPayee",((Vente)parent.getItemAtPosition(position)).paye);
+        startActivityForResult(intent,0);
+    }
+
     public class Vente {
+        public int idVente;
         private String nomAcheteur;
         private String prix;
         private String quantite;
         private String reference;
         private Boolean paye;
 
-        public Vente (String nomAcheteur, String prix, String quantite, String reference, Boolean paye) {
+        public Vente (int id,String nomAcheteur, String prix, String quantite, String reference, Boolean paye) {
+            this.idVente=id;
             this.nomAcheteur = nomAcheteur;
             this.prix = prix;
             this.quantite = quantite;
@@ -90,6 +108,9 @@ public class AchatActivity extends AppCompatActivity{
             this.paye = paye;
         }
 
+        public int getIdVente(){
+            return this.idVente;
+        }
         public String getNomAcheteur(){
             return this.nomAcheteur;
         }
@@ -155,12 +176,36 @@ public class AchatActivity extends AppCompatActivity{
 
     private List<Vente> genererVentes(){
         List<Vente> ventes = new ArrayList<Vente>();
-        ventes.add(new Vente("Nicolas CARRION","35 €", "7", "5874A52F",Boolean.TRUE));
-        ventes.add(new Vente("Florian STAINE","5 €", "1", "6984615G",Boolean.FALSE));
-        ventes.add(new Vente("Cédric WELTY","55 €", "9", "321EF651",Boolean.TRUE));
-        ventes.add(new Vente("Guillaume BOURRIOT","34 €", "3", "SD12684P",Boolean.TRUE));
-        ventes.add(new Vente("Antoine COUPAT","48 €", "7", "DL469CM0",Boolean.FALSE));
-        ventes.add(new Vente("Florian BRUNSTEIN","3 €", "1", "3465XZ68",Boolean.FALSE));
+
+        ProduitManager produitManager = new ProduitManager(this);
+        TubeManager tubeManager = new TubeManager(this);
+        AchatManager achatManager = new AchatManager(this);
+        ClientManager clientManager = new ClientManager(this);
+        Tube t;
+        Cursor cursorTube;
+
+        produitManager.open();
+        tubeManager.open();
+        clientManager.open();
+        achatManager.open();
+
+        Cursor cursorAchats = achatManager.getAchats();
+
+        while(cursorAchats.moveToNext()){
+            // client clientManager.getClient(cursorAchats.getInt(1)).get
+            t= tubeManager.getTube(cursorAchats.getInt(1));
+            //Log.i("Cursor",cursorProduit.getInt(1)+"");
+            Produit p = produitManager.getProduit(cursorAchats.getInt(2));
+            boolean b =false;
+            if(achatManager.getAchat(cursorAchats.getInt(4)).getAchat_effectue()>0)
+                b=true;
+            ventes.add(new Vente(cursorAchats.getInt(0),clientManager.getClient(cursorAchats.getInt(1)).getNom_client(), p.getPrix_produit()+"",cursorAchats.getInt(3)+"",tubeManager.getTube(p.getId_tube()).getNom_tube(),b));
+        }
+
+        produitManager.close();
+        tubeManager.close();
+        clientManager.close();
+        achatManager.close();
         return ventes;
     }
 

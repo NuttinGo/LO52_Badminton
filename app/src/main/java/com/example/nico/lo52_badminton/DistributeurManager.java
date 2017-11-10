@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
  */
 
 public class DistributeurManager {
-    private static final String TABLE_NAME = "distributeur";
+    public static final String TABLE_NAME = "distributeur";
     public static final String KEY_ID_DISTRIBUTEUR="id_distributeur";
     public static final String KEY_NOM_DISTRIBUTEUR="nom_distributeur";
     public static final String CREATE_TABLE_DISTRIBUTEUR = "CREATE TABLE "+TABLE_NAME+
@@ -91,6 +91,7 @@ public class DistributeurManager {
         // sélection de tous les enregistrements de la table
         return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
     }
+
 
 
 }
